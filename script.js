@@ -1,17 +1,17 @@
 // Data konversi emisi CO2 (kg CO2e per unit per minggu)
 const EMISSION_FACTORS = {
-    // Transportasi
-    car: 0.25,        // kg CO2/km mobil bensin
-    motorcycle: 0.12, // kg CO2/km motor
-    publicTransport: 0.08, // kg CO2 per perjalanan
+    // Transportasi (kg CO2 per km)
+    car: 0.20,
+    motorcycle: 0.08,
+    publicTransport: 0.06, // per km (bus/kereta rata-rata)
 
     // Energi
-    electricity: 0.85, // kg CO2/kWh listrik PLN
-    gas: 3.0,         // kg CO2/kg LPG
+    electricity: 0.75,
+    gas: 2.98,
 
     // Makanan
-    redMeat: 50,      // kg CO2/kg daging merah
-    dairy: 3.5        // kg CO2/liter susu
+    redMeat: 30,
+    dairy: 2.0
 };
 
 // Batasan untuk penilaian
