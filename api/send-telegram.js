@@ -64,7 +64,7 @@ Total Emisi: ${formatNumber(emissions.total)} kg CO₂e/minggu
 Kategori: ${escapeHtml(score.label)}
 Keterangan: ${escapeHtml(score.description)}
 
-📅 Dikirim otomatis dari website Diksil Dikwar Kel 1.
+📅 Dikirim otomatis dari website Ekasena.
         `.trim();
 
         const sendResults = [];
