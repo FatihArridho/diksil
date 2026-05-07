@@ -68,10 +68,21 @@ function toggleMobileMenu() {
 }
 
 // Calculate carbon footprint
-function calculateCarbonFootprint(e) {
+async function calculateCarbonFootprint(e) {
     e.preventDefault();
 
-    // Ambil nilai input
+    // Ambil data responden
+    const respondent = {
+        fullName: document.getElementById('fullName').value.trim(),
+        nim: document.getElementById('nim').value.trim()
+    };
+
+    if (!respondent.fullName || !respondent.nim) {
+        alert('Nama lengkap dan NIM wajib diisi.');
+        return;
+    }
+
+    // Ambil nilai input aktivitas
     const inputs = {
         carDistance: parseFloat(document.getElementById('carDistance').value) || 0,
         motorDistance: parseFloat(document.getElementById('motorDistance').value) || 0,
@@ -102,14 +113,49 @@ function calculateCarbonFootprint(e) {
 
     emissions.total = emissions.transport + emissions.energy + emissions.food;
 
-    // Tampilkan hasil
+    // Tampilkan hasil ke website
     displayResults(emissions);
     results.style.display = 'block';
+
+    // Kirim hasil ke Telegram
+    await sendResultToTelegram(respondent, inputs, emissions);
 
     // Scroll ke bagian hasil
     results.scrollIntoView({
         behavior: 'smooth'
     });
+}
+
+// Kirim hasil ke backend agar diteruskan ke Telegram
+async function sendResultToTelegram(respondent, inputs, emissions) {
+    try {
+        const response = await fetch('/api/send-telegram', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                respondent,
+                inputs,
+                emissions,
+                score: {
+                    label: getScoreLabel(emissions.total),
+                    description: getScoreDescription(emissions.total)
+                }
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('Gagal kirim ke Telegram:', data);
+            return;
+        }
+
+        console.log('Hasil berhasil dikirim ke Telegram:', data);
+    } catch (error) {
+        console.error('Error kirim ke Telegram:', error);
+    }
 }
 
 // Display results

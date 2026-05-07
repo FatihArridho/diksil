@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekasena - Hitung Emisi Karbon Anda</title>
+    <title>Diksil Dikwar Kel 1 - Hitung Emisi Karbon Anda</title>
 
     <!-- Icon Website -->
     <link rel="icon" type="image/png" href="logo.png">
@@ -24,7 +24,7 @@
             <div class="nav-container">
                 <div class="logo">
                     <img src="logo.png" alt="Logo Diksil Dikwar Kelompok 1" class="logo-img">
-                    <span>EKASENA</span>
+                    <span>DIKSIL DIKWAR KEL 1</span>
                 </div>
 
                 <div class="nav-toggle" id="mobile-menu">
@@ -105,10 +105,28 @@
                     <i class="fas fa-chart-line"></i>
                     Kalkulator Jejak Karbon
                 </h2>
-                <p>Masukkan data aktivitas harian Anda per minggu</p>
+                <p>Masukkan data responden dan aktivitas harian Anda per minggu</p>
             </div>
 
             <form class="calc-form" id="carbonForm">
+                <!-- Data Responden -->
+                <div class="form-group">
+                    <h3>
+                        <i class="fas fa-user"></i>
+                        Data Responden
+                    </h3>
+
+                    <div class="input-group">
+                        <label for="fullName">Nama Lengkap</label>
+                        <input type="text" id="fullName" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nim">NIM</label>
+                        <input type="text" id="nim" placeholder="Masukkan NIM" required>
+                    </div>
+                </div>
+
                 <!-- Transportasi -->
                 <div class="form-group">
                     <h3>
@@ -260,7 +278,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Ekasena. Dibuat untuk menjaga bumi kita.</p>
+            <p>&copy; 2026 Diksil Dikwar Kel 1. Dibuat untuk menjaga bumi kita.</p>
         </div>
     </footer>
 
