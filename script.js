@@ -16,10 +16,10 @@ const EMISSION_FACTORS = {
 
 // Batasan untuk penilaian
 const SCORE_LIMITS = {
-    good: 25,       // < 25 kg = Baik
-    moderate: 38,   // 25 - 38 kg = Sedang
-    high: 50,       // 38 - 50 kg = Tinggi
-    veryHigh: Infinity // >= 50 kg = Sangat Tinggi
+    good: 25,          // < 25 kg = Baik
+    moderate: 40,      // 25 - 40 kg = Sedang
+    high: 60,          // 40 - 60 kg = Tinggi
+    veryHigh: Infinity // >= 60 kg = Sangat Tinggi
 };
 
 // Tips berdasarkan kategori
