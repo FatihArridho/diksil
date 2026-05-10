@@ -16,10 +16,10 @@ const EMISSION_FACTORS = {
 
 // Batasan untuk penilaian
 const SCORE_LIMITS = {
-    good: 10,
-    moderate: 20,
-    high: 30,
-    veryHigh: Infinity
+    good: 25,       // < 25 kg = Baik
+    moderate: 38,   // 25 - 38 kg = Sedang
+    high: 50,       // 38 - 50 kg = Tinggi
+    veryHigh: Infinity // >= 50 kg = Sangat Tinggi
 };
 
 // Tips berdasarkan kategori
@@ -187,23 +187,22 @@ function displayResults(emissions) {
 
 // Get score label
 function getScoreLabel(total) {
-    if (total < SCORE_LIMITS.good) return '🏆 Sangat Baik';
-    if (total < SCORE_LIMITS.moderate) return '👍 Baik';
-    if (total < SCORE_LIMITS.high) return '⚠️ Sedang';
-    if (total < SCORE_LIMITS.veryHigh) return '🔴 Tinggi';
+    if (total < SCORE_LIMITS.good) return '👍 Baik';
+    if (total < SCORE_LIMITS.moderate) return '⚠️ Sedang';
+    if (total < SCORE_LIMITS.high) return '🔴 Tinggi';
     return '🚨 Sangat Tinggi';
 }
 
 // Get score description
 function getScoreDescription(total) {
     if (total < SCORE_LIMITS.good) {
-        return 'Jejak karbon Anda sangat rendah! Terus jaga kebiasaan baik ini.';
+        return 'Jejak karbon Anda masih tergolong baik. Pertahankan kebiasaan ramah lingkungan ini.';
     } else if (total < SCORE_LIMITS.moderate) {
-        return 'Jejak karbon Anda berada di bawah rata-rata. Bagus!';
+        return 'Jejak karbon Anda berada pada kategori sedang. Masih ada ruang untuk menguranginya.';
     } else if (total < SCORE_LIMITS.high) {
-        return 'Ada ruang untuk perbaikan. Coba terapkan tips di bawah ini.';
+        return 'Jejak karbon Anda tergolong tinggi. Coba kurangi penggunaan energi, kendaraan pribadi, atau konsumsi tinggi emisi.';
     } else {
-        return 'Jejak karbon Anda tinggi. Saatnya bertindak untuk menguranginya!';
+        return 'Jejak karbon Anda sangat tinggi. Perlu tindakan nyata untuk mengurangi dampak terhadap lingkungan.';
     }
 }
 
@@ -213,13 +212,13 @@ function updateScoreCircle(total) {
     let color;
 
     if (total < SCORE_LIMITS.good) {
-        color = '#4CAF50';
+        color = '#4CAF50'; // Baik - hijau
     } else if (total < SCORE_LIMITS.moderate) {
-        color = '#8BC34A';
+        color = '#FF9800'; // Sedang - oranye
     } else if (total < SCORE_LIMITS.high) {
-        color = '#FF9800';
+        color = '#F44336'; // Tinggi - merah
     } else {
-        color = '#F44336';
+        color = '#B71C1C'; // Sangat Tinggi - merah tua
     }
 
     circle.style.background = `linear-gradient(135deg, ${color}20, ${color}30)`;
