@@ -50,6 +50,19 @@ const TIPS = {
 const form = document.getElementById('carbonForm');
 const results = document.getElementById('results');
 
+function parseInputNumber(value) {
+    if (!value) return 0;
+
+    const cleanedValue = String(value)
+        .trim()
+        .replace(',', '.')
+        .replace(/[^0-9.]/g, '');
+
+    const number = parseFloat(cleanedValue);
+
+    return isNaN(number) ? 0 : number;
+}
+
 // Event Listeners
 form.addEventListener('submit', calculateCarbonFootprint);
 document.getElementById('mobile-menu')?.addEventListener('click', toggleMobileMenu);
@@ -84,15 +97,14 @@ async function calculateCarbonFootprint(e) {
 
     // Ambil nilai input aktivitas
     const inputs = {
-        carDistance: parseFloat(document.getElementById('carDistance').value) || 0,
-        motorDistance: parseFloat(document.getElementById('motorDistance').value) || 0,
-        publicTransport: parseFloat(document.getElementById('publicTransport').value) || 0,
-        electricity: parseFloat(document.getElementById('electricity').value) || 0,
-        gas: parseFloat(document.getElementById('gas').value) || 0,
-        redMeat: parseFloat(document.getElementById('redMeat').value) || 0,
-        dairy: parseFloat(document.getElementById('dairy').value) || 0
-    };
-
+    carDistance: parseInputNumber(document.getElementById('carDistance').value),
+    motorDistance: parseInputNumber(document.getElementById('motorDistance').value),
+    publicTransport: parseInputNumber(document.getElementById('publicTransport').value),
+    electricity: parseInputNumber(document.getElementById('electricity').value),
+    gas: parseInputNumber(document.getElementById('gas').value),
+    redMeat: parseInputNumber(document.getElementById('redMeat').value),
+    dairy: parseInputNumber(document.getElementById('dairy').value)
+};
     // Hitung emisi berdasarkan kategori
     const emissions = {
         transport:
@@ -330,13 +342,24 @@ function resetCalculator() {
 }
 
 // Validasi input angka agar tidak minus
-document.querySelectorAll('input[type="number"]').forEach(input => {
-    input.addEventListener('input', function () {
-        const value = parseFloat(this.value);
+const numericInputIds = [
+    'carDistance',
+    'motorDistance',
+    'publicTransport',
+    'electricity',
+    'gas',
+    'redMeat',
+    'dairy'
+];
 
-        if (value < 0) {
-            this.value = 0;
-        }
+numericInputIds.forEach(id => {
+    const input = document.getElementById(id);
+
+    input.addEventListener('input', function () {
+        this.value = this.value
+            .replace(/[^0-9,\.]/g, '')
+            .replace(/\./g, ',')
+            .replace(/(,.*),/g, '$1');
     });
 });
 
