@@ -1,4 +1,4 @@
-// Data konversi emisi CO2 (kg CO2e per unit per minggu)
+// Data konversi emisi CO2 (kg CO2e per unit perminggu)
 const EMISSION_FACTORS = {
     // Transportasi (kg CO2 per km)
     car: 0.20,
